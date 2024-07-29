@@ -4,7 +4,7 @@ from openai import OpenAI
 # Show title and description.
 st.title("📄 Document question answering")
 st.write(
-    "Upload a document below and ask a question about it – GPT will answer! "
+    "Submit a paragraph of information and ask a question about it – GPT will answer! "
     "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
 )
 
@@ -20,13 +20,11 @@ else:
     client = OpenAI(api_key=openai_api_key)
 
     # Let the user upload a file via `st.file_uploader`.
-    uploaded_file = st.file_uploader(
-        "Upload a document (.txt or .md)", type=("txt", "md")
-    )
+    document = st.text_area("Insert a paragraph of information.")
 
     # Ask the user for a question via `st.text_area`.
     question = st.text_area(
-        "Now ask a question about the document!",
+        "Now ask a question about the paragraph!",
         placeholder="Can you give me a short summary?",
         disabled=not uploaded_file,
     )
@@ -38,7 +36,7 @@ else:
         messages = [
             {
                 "role": "user",
-                "content": f"Here's a document: {document} \n\n---\n\n {question}",
+                "content": f"Here's a paragraph: {document} \n\n---\n\n {question}",
             }
         ]
 
