@@ -26,13 +26,13 @@ else:
     question = st.text_area(
         "Now ask a question about the paragraph!",
         placeholder="Can you give me a short summary?",
-        disabled=not uploaded_file,
+        disabled=not document,
     )
 
-    if uploaded_file and question:
+    if document and question:
 
         # Process the uploaded file and question.
-        document = uploaded_file.read().decode()
+        document = document
         messages = [
             {
                 "role": "user",
